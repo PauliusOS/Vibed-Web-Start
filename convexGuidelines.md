@@ -38,6 +38,16 @@ http.route({
 - HTTP endpoints are always registered at the exact path you specify in the \`path\` field. For example,
 if you specify \`/api/someRoute\`, the endpoint will be registered at \`/api/someRoute\`.
 
+**IMPORTANT: HTTP Actions URL Domain**
+- HTTP endpoints (webhooks, file uploads, etc.) are accessible at the **\`.convex.site\`** domain, NOT \`.convex.cloud\`
+- Example:
+  - ✅ Correct: \`https://your-deployment.convex.site/stripe/webhook\`
+  - ❌ Wrong: \`https://your-deployment.convex.cloud/stripe/webhook\`
+- The \`.convex.cloud\` URL is for the Convex backend API (database queries/mutations)
+- The \`.convex.site\` URL is specifically for HTTP Actions
+- You can find your HTTP Actions URL in the Convex Dashboard → Settings → URL & Deploy Key
+- Always use \`.convex.site\` when configuring webhooks (Stripe, GitHub, etc.) or public HTTP endpoints
+
 ### Validators
 
 - Here are the valid Convex types along with their respective validators:
