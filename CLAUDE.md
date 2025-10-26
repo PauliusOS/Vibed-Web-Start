@@ -4,34 +4,27 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Claude Code Instructions
 
-### Custom Agents and Plans
-- **`/agents`** - Contains custom agent definitions for specialized tasks
-  - Before implementing features, check if a relevant agent exists in this directory
+### Subagents, Plans and Skills
+- **`/skills`** - contains the custom skills you can use to do specific things
+  - Before proceeding please check if there is a skill for the requested action
+- **`/agents`** - Contains custom agent personas
+  - Before implementing features, check if a relevant agent exists in this directory that can be invoked
   - Invoke custom agents using the Task tool when their expertise matches the request
-  - Each agent file defines its purpose, when to use it, and expected behavior
   - If no matching agent exists, proceed with the task normally
-- **`/plans`** - Contains implementation plans for specific features
+- **`/plans`** - Contains plans for implementing new features
+  - Usually called out to be used by an agent or user
   - Before implementing features, check if a relevant plan exists in this directory
-  - Follow the step-by-step instructions in the plan when implementing the feature
-  - Plans provide architecture decisions, file locations, and implementation details
   - If a user requests a feature with a plan, always reference and follow that plan
-  - If no matching plan exists, proceed with the implementation normally
+  - If no matching plan exists, proceed with the implementation with your own plan
 
-**IMPORTANT**: Always check these directories when starting a new feature or task. Custom agents and plans provide project-specific expertise and tested approaches when available.
+**IMPORTANT**: Always check these directories when starting a new feature or task. subagents, skills and plans provide project-specific expertise and tested approaches when available.
 
 ## Commands
 
 ### Development
 - `npm run dev` - Runs both Next.js frontend and Convex backend in parallel
-  - Frontend: http://localhost:3000
+  - http://localhost:3000
   - Convex dashboard opens automatically
-- `npm run dev:frontend` - Run only Next.js frontend with Turbopack
-- `npm run dev:backend` - Run only Convex backend
-
-### Build & Production
-- `npm run build` - Build Next.js for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
 
 ### Convex
 - `npx convex dev` - Start Convex development server (auto-started with `npm run dev`)
@@ -57,15 +50,6 @@ This is a full-stack TypeScript application using:
 - **ConvexClientProvider** (components/ConvexClientProvider.tsx) wraps the app with `ConvexProviderWithClerk` to integrate Convex with Clerk auth
 - **Middleware** (middleware.ts) protects `/server` routes using Clerk
 - Path aliases configured: `@/*` maps to root directory
-
-## Setup Requirements
-
-### Environment Variables
-```env
-NEXT_PUBLIC_CONVEX_URL=<your-convex-deployment-url>
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=<clerk-publishable-key>
-CLERK_SECRET_KEY=<clerk-secret-key>
-```
 
 ### Clerk JWT Configuration
 1. Create a JWT template named "convex" in Clerk dashboard
@@ -118,7 +102,6 @@ CLERK_SECRET_KEY=<clerk-secret-key>
 When implementing features that require API keys:
 1. Ask the user to provide the API key
 2. Add the key to `.env.local` file yourself (create the file if it doesn't exist)
-3. Update `.env.example` with a placeholder entry for documentation
 4. Never ask the user to manually edit environment files - handle it for them
 
 ## Convex Backend Development
