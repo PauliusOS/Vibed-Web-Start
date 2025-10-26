@@ -11,7 +11,7 @@ export const list = query({
 
     const todos = await ctx.db
       .query("todos")
-      .withIndex("by_user", (q) => q.eq("userId", identity.tokenIdentifier))
+      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
       .order("desc")
       .collect();
 
@@ -34,7 +34,7 @@ export const create = mutation({
       title: args.title,
       description: args.description,
       status: "pending",
-      userId: identity.tokenIdentifier,
+      userId: identity.subject,
       createdAt: Date.now(),
     });
 
@@ -53,7 +53,7 @@ export const toggleComplete = mutation({
     }
 
     const todo = await ctx.db.get(args.id);
-    if (!todo || todo.userId !== identity.tokenIdentifier) {
+    if (!todo || todo.userId !== identity.subject) {
       throw new Error("Todo not found or unauthorized");
     }
 
@@ -76,7 +76,7 @@ export const remove = mutation({
     }
 
     const todo = await ctx.db.get(args.id);
-    if (!todo || todo.userId !== identity.tokenIdentifier) {
+    if (!todo || todo.userId !== identity.subject) {
       throw new Error("Todo not found or unauthorized");
     }
 
@@ -97,7 +97,7 @@ export const update = mutation({
     }
 
     const todo = await ctx.db.get(args.id);
-    if (!todo || todo.userId !== identity.tokenIdentifier) {
+    if (!todo || todo.userId !== identity.subject) {
       throw new Error("Todo not found or unauthorized");
     }
 
