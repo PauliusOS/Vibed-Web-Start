@@ -30,7 +30,6 @@ export default function RootLayout({
           <ClerkProvider
             dynamic
             appearance={{
-              baseTheme: "dark",
               variables: {
                 colorPrimary: "#ffffff",
                 colorBackground: "#000000",
