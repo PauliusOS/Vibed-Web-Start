@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { MotionPreset } from '@/components/ui/motion-preset';
 
 export function TrustedBy() {
   const logos = [
@@ -21,9 +22,15 @@ export function TrustedBy() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Headline */}
-        <h2 className="text-[#16101e] text-3xl sm:text-4xl font-bold text-center mb-12 sm:mb-16">
-          Trusted by Leading Brands
-        </h2>
+        <MotionPreset
+          fade
+          slide={{ direction: 'up', offset: 30 }}
+          delay={0}
+        >
+          <h2 className="text-[#16101e] text-3xl sm:text-4xl font-bold text-center mb-12 sm:mb-16">
+            Trusted by Leading Brands
+          </h2>
+        </MotionPreset>
       </div>
 
       {/* Scrolling Logos - Full width */}
@@ -59,14 +66,10 @@ export function TrustedBy() {
         .animate-scroll {
           display: flex;
           width: max-content;
-          animation: scroll 25s linear infinite;
+          animation: scroll 45s linear infinite;
           will-change: transform;
           backface-visibility: hidden;
           perspective: 1000px;
-        }
-
-        .animate-scroll:hover {
-          animation-play-state: paused;
         }
       `}</style>
     </section>

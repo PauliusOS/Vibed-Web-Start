@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { AnimatedWaves } from '@/components/animated-waves';
+import { MotionPreset } from '@/components/ui/motion-preset';
 
 export function Hero() {
   return (
@@ -12,15 +13,22 @@ export function Hero() {
       <AnimatedWaves className="z-0" />
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#f4f4f4]/70 backdrop-blur-xl">
+      <MotionPreset
+        component="nav"
+        fade
+        slide={{ direction: 'down', offset: 20 }}
+        delay={0}
+        inView={false}
+        className="fixed top-0 left-0 right-0 z-50 bg-[#f4f4f4]/70 backdrop-blur-xl"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center">
               <Image
-                src="/logos/silkroad-logo.png"
-                alt="SilkRoad"
-                width={120}
+                src="/logos/sylcroad-logo.png"
+                alt="SylcRoad"
+                width={140}
                 height={32}
                 className="h-8 w-auto"
               />
@@ -73,19 +81,32 @@ export function Hero() {
             </div>
           </div>
         </div>
-      </nav>
+      </MotionPreset>
 
       {/* Hero Section */}
       <section className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 md:pt-40 pb-20 sm:pb-24 md:pb-32">
         <div className="max-w-6xl mx-auto text-center">
           {/* Main Heading */}
-          <h1 className="font-bold text-[#16101e] leading-tight tracking-tight text-5xl sm:text-6xl md:text-7xl mb-4 sm:mb-5">
-            Influencer Campaigns<br />
-            Engineered for Performance.
-          </h1>
+          <MotionPreset
+            fade
+            slide={{ direction: 'up', offset: 40 }}
+            delay={0.1}
+            inView={false}
+          >
+            <h1 className="font-bold text-[#16101e] leading-tight tracking-tight text-5xl sm:text-6xl md:text-7xl mb-4 sm:mb-5">
+              Influencer Campaigns<br />
+              Engineered for Performance.
+            </h1>
+          </MotionPreset>
 
           {/* Stats Section */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 mb-32 sm:mb-44">
+          <MotionPreset
+            fade
+            slide={{ direction: 'up', offset: 30 }}
+            delay={0.2}
+            inView={false}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 mb-32 sm:mb-44"
+          >
             {/* Left Stat */}
             <div className="text-[#16101e]">
               <span className="text-sm font-medium">20+ Clients</span>
@@ -123,16 +144,29 @@ export function Hero() {
             <div className="text-[#16101e]">
               <span className="text-sm font-medium">100M+ Views Generated</span>
             </div>
-          </div>
+          </MotionPreset>
 
           {/* Subheadline */}
-          <p className="text-[#16101e]/70 text-lg sm:text-xl max-w-4xl mx-auto mb-6 sm:mb-8">
-            We connect brands with hand-picked creators, deliver custom strategies,
-            and maximize your influencer marketing ROI—all through one transparent platform.
-          </p>
+          <MotionPreset
+            fade
+            slide={{ direction: 'up', offset: 30 }}
+            delay={0.3}
+            inView={false}
+          >
+            <p className="text-[#16101e]/70 text-lg sm:text-xl max-w-4xl mx-auto mb-6 sm:mb-8">
+              We connect brands with hand-picked creators, deliver custom strategies,
+              and maximize your influencer marketing ROI—all through one transparent platform.
+            </p>
+          </MotionPreset>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <MotionPreset
+            fade
+            slide={{ direction: 'up', offset: 30 }}
+            delay={0.4}
+            inView={false}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
             <Link href="/contact">
               <Button
                 className="h-auto py-3 px-6 text-base font-medium rounded-xl bg-black text-white transition-shadow duration-200 hover:shadow-lg hover:bg-black"
@@ -155,7 +189,7 @@ export function Hero() {
                 See How It Works
               </Button>
             </Link>
-          </div>
+          </MotionPreset>
         </div>
       </section>
     </div>

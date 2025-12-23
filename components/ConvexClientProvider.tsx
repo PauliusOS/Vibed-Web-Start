@@ -5,7 +5,8 @@ import { ConvexReactClient } from "convex/react";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
 import { useAuth } from "@clerk/nextjs";
 
-const convexUrl = process.env.NEXT_PUBLIC_CONVEX_URL || "";
+// Only create Convex client if URL is configured
+const convexUrl = process.env.NEXT_PUBLIC_CONVEX_URL;
 const convex = convexUrl ? new ConvexReactClient(convexUrl) : null;
 
 export default function ConvexClientProvider({
@@ -13,8 +14,8 @@ export default function ConvexClientProvider({
 }: {
   children: ReactNode;
 }) {
+  // Graceful degradation: if Convex isn't configured, render children directly
   if (!convex) {
-    // If Convex is not configured, just render children
     return <>{children}</>;
   }
 

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Mail, Users, MessageCircle, Building2, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { MotionPreset } from '@/components/ui/motion-preset';
 
 export default function ContactPage() {
   const [userType, setUserType] = useState<'company' | 'creator' | null>(null);
@@ -70,14 +71,21 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-[#f4f4f4]">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#f4f4f4]/70 backdrop-blur-xl">
+      <MotionPreset
+        component="nav"
+        fade
+        slide={{ direction: 'down', offset: 20 }}
+        delay={0}
+        inView={false}
+        className="fixed top-0 left-0 right-0 z-50 bg-[#f4f4f4]/70 backdrop-blur-xl"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center">
               <Image
-                src="/logos/silkroad-logo.png"
-                alt="SilkRoad"
+                src="/logos/sylcroad-logo.png"
+                alt="SylcRoad"
                 width={120}
                 height={32}
                 className="h-8 w-auto"
@@ -131,33 +139,59 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
-      </nav>
+      </MotionPreset>
 
       {/* Contact Section */}
       <section className="relative pt-28 sm:pt-32 md:pt-40 pb-20 sm:pb-24 md:pb-32">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Badge */}
-          <div className="flex justify-center mb-6">
+          <MotionPreset
+            fade
+            slide={{ direction: 'up', offset: 20 }}
+            delay={0}
+            inView={false}
+            className="flex justify-center mb-6"
+          >
             <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-[#f4f4f4] shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06),inset_0_2px_8px_rgba(255,255,255,0.95)]">
               <MessageCircle className="w-4 h-4 text-[#6b6b6b]" />
               <span className="text-sm font-medium text-[#3a3a3a] uppercase tracking-wider">Contact</span>
             </div>
-          </div>
+          </MotionPreset>
 
           {/* Header */}
           <div className="text-center mb-12 sm:mb-16">
-            <h1 className="text-[#16101e] text-4xl sm:text-5xl md:text-6xl font-serif italic mb-4 sm:mb-6">
-              Get in Touch
-            </h1>
-            <p className="text-[#16101e]/70 text-lg sm:text-xl max-w-3xl mx-auto">
-              Whether you have questions about our services or need personalized attention, our team is ready to help you.
-            </p>
+            <MotionPreset
+              fade
+              slide={{ direction: 'up', offset: 30 }}
+              delay={0.1}
+              inView={false}
+            >
+              <h1 className="text-[#16101e] text-4xl sm:text-5xl md:text-6xl font-serif italic mb-4 sm:mb-6">
+                Get in Touch
+              </h1>
+            </MotionPreset>
+            <MotionPreset
+              fade
+              slide={{ direction: 'up', offset: 20 }}
+              delay={0.2}
+              inView={false}
+            >
+              <p className="text-[#16101e]/70 text-lg sm:text-xl max-w-3xl mx-auto">
+                Whether you have questions about our services or need personalized attention, our team is ready to help you.
+              </p>
+            </MotionPreset>
           </div>
 
           {/* Two Column Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Left Card - Email Us */}
-            <div className="bg-[#f4f4f4] rounded-[24px] p-8 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06),inset_0_4px_12px_rgba(255,255,255,0.95)]">
+            <MotionPreset
+              fade
+              slide={{ direction: 'up', offset: 40 }}
+              delay={0.3}
+              inView={false}
+            >
+              <div className="bg-[#f4f4f4] rounded-[24px] p-8 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06),inset_0_4px_12px_rgba(255,255,255,0.95)] h-full">
               <div className="w-12 h-12 rounded-xl bg-gradient-to-t from-[#2a2a2a] to-[#1a1a1a] flex items-center justify-center mb-6 shadow-lg">
                 <Mail className="w-6 h-6 text-white" />
               </div>
@@ -166,15 +200,22 @@ export default function ContactPage() {
                 Looking to work with us? We're just one email away.
               </p>
               <a
-                href="mailto:contact@silkroad.com"
+                href="mailto:contact@sylcroad.com"
                 className="text-[#09f] font-medium hover:underline"
               >
-                contact@silkroad.com
+                contact@sylcroad.com
               </a>
-            </div>
+              </div>
+            </MotionPreset>
 
             {/* Right Card - Join Us Form */}
-            <div className="bg-[#f4f4f4] rounded-[24px] p-8 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06),inset_0_4px_12px_rgba(255,255,255,0.95)]">
+            <MotionPreset
+              fade
+              slide={{ direction: 'up', offset: 40 }}
+              delay={0.4}
+              inView={false}
+            >
+              <div className="bg-[#f4f4f4] rounded-[24px] p-8 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06),inset_0_4px_12px_rgba(255,255,255,0.95)]">
               <div className="w-12 h-12 rounded-xl bg-gradient-to-t from-[#2a2a2a] to-[#1a1a1a] flex items-center justify-center mb-6 shadow-lg">
                 <Users className="w-6 h-6 text-white" />
               </div>
@@ -376,7 +417,8 @@ export default function ContactPage() {
                   Select whether you're a Company or Creator to continue
                 </p>
               )}
-            </div>
+              </div>
+            </MotionPreset>
           </div>
         </div>
       </section>

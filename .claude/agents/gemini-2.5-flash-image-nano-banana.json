@@ -1,0 +1,34 @@
+{
+  "_creationTime": 1760315600889.7043,
+  "_id": "kn7agrbycd6d9ytvah29w6qms57scf8g",
+  "authorEmail": "0xpaulius@gmail.com",
+  "authorName": "Paulius",
+  "categories": [
+    "AI"
+  ],
+  "clerkId": "user_30mlLem6xz7dBn7sqJNMUozNjBR",
+  "createdAt": 1760315600889.0,
+  "databases": [
+    "Convex"
+  ],
+  "description": "Implement Gemini 2.5 Flash Image (nano-banana)",
+  "frameworks": [
+    "Expo"
+  ],
+  "instructions": "---\nname: agent-nano-banana-editor\ndescription: when implementing an AI image editor into app\nmodel: inherit\ncolor: blue\n---\n\n# Agent: Nano Banana Editor\n\nPrevent these exact errors when implementing AI image editing in React Native + Convex.\n\n## Error Prevention Checklist\n\n### 1. TypeScript Return Types\n**WILL ERROR:** `TS7022: 'editImageWithGemini' implicitly has type 'any'`\n```typescript\n// \u274c This breaks\nexport const editImageWithGemini = action({\n  args: { userId: v.string() },\n  handler: async (ctx, { userId }) => {\n\n// \u2705 This works  \nexport const editImageWithGemini = action({\n  args: { userId: v.string() },\n  handler: async (ctx, { userId }): Promise<{ success: boolean; versionId?: any }> => {\n```\n\n### 2. Gemini Model Names\n**WILL ERROR:** `[404 Not Found] models/gemini-2.5-flash-image is not found`\n```typescript\n// \u274c This breaks\nmodel: 'gemini-2.5-flash-image'\n\n// \u2705 This works\nmodel: 'gemini-2.5-flash-image-preview'\n```\n\n### 3. Buffer in Convex Environment\n**WILL ERROR:** `ReferenceError: Buffer is not defined`\n```typescript\n// \u274c This breaks\nconst base64 = Buffer.from(arrayBuffer).toString('base64');\nconst imageBuffer = Buffer.from(base64Data, 'base64');\n\n// \u2705 This works - chunked conversion\nconst uint8Array = new Uint8Array(arrayBuffer);\nlet binaryString = '';\nconst chunkSize = 8192;\nfor (let i = 0; i < uint8Array.length; i += chunkSize) {\n  const chunk = uint8Array.slice(i, i + chunkSize);\n  binaryString += String.fromCharCode.apply(null, Array.from(chunk));\n}\nconst base64 = btoa(binaryString);\n\n// For base64 to blob\nconst binaryString = atob(base64Data);\nconst uint8Array = new Uint8Array(binaryString.length);\nfor (let i = 0; i < binaryString.length; i++) {\n  uint8Array[i] = binaryString.charCodeAt(i);\n}\nconst blob = new Blob([uint8Array], { type: 'image/jpeg' });\n```\n\n### 4. Large Array Spread Operator\n**WILL ERROR:** `RangeError: Maximum call stack size exceeded`\n```typescript\n// \u274c This breaks with large images\nconst base64 = btoa(String.fromCharCode(...uint8Array));\n\n// \u2705 This works - use chunked processing from #3 above\n```\n\n### 5. Data URL Fetching\n**WILL ERROR:** `Unsupported URL scheme -- http and https are supported (scheme was data)`\n```typescript\n// \u274c This breaks\nconst response = await fetch(sourceImageUrl); // fails if data: URL\n\n// \u2705 This works\nif (sourceImageUrl.startsWith('data:')) {\n  const base64Match = sourceImageUrl.match(/^data:image\\/[^;]+;base64,(.+)$/);\n  if (!base64Match) throw new Error('Invalid data URL format');\n  base64Data = base64Match[1];\n} else {\n  const response = await fetch(sourceImageUrl);\n  if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);\n  // ... convert to base64 using chunked method\n}\n```\n\n### 6. Database Size Limits\n**WILL ERROR:** `Value is too large (1.76 MiB > maximum size 1 MiB)`\n```typescript\n// \u274c This breaks - data URLs are huge\nawait ctx.db.insert(\"projects\", {\n  originalImageUrl: asset.uri, // data: URL = several MB\n});\n\n// Frontend passes data URL to mutation\nconst projectId = await createProject({\n  originalImageUrl: asset.uri, // BREAKS!\n});\n\n// \u2705 This works - only storage IDs in database\n// Backend generates URL from storage ID\nconst imageUrl = await ctx.storage.getUrl(originalImageId);\nawait ctx.db.insert(\"projects\", {\n  originalImageId: storageId, // small ID\n  originalImageUrl: imageUrl, // generated URL\n});\n\n// Frontend only passes storage ID\nconst projectId = await createProject({\n  originalImageId: storageId, // WORKS!\n});\n```\n\n## Implementation Rules\n\n1. **ALWAYS** add `: Promise<Type>` to all Convex action handlers\n2. **ALWAYS** use `gemini-2.5-flash-image-preview` (with -preview suffix)\n3. **NEVER** use `Buffer` - use chunked `btoa`/`atob` with 8KB chunks\n4. **NEVER** use spread operator on large arrays - use chunked processing\n5. **ALWAYS** check `imageUrl.startsWith('data:')` before fetch\n6. **NEVER** store data URLs in database - upload to storage first, pass only storage IDs",
+  "isPublic": true,
+  "logoStorageId": "kg22pe313y8rsrch9eqznt17e57sctvg",
+  "logoUrl": "https://tacit-capybara-732.convex.cloud/api/storage/6aba6c49-647f-405f-ab3e-53a6aa55acc2",
+  "mcpServers": [],
+  "name": "Gemini 2.5 Flash Image (Nano-Banana)",
+  "popularity": 16.0,
+  "tags": [
+    "convex",
+    "gemini 2.5 flash image",
+    "ai",
+    "ai image editing"
+  ],
+  "updatedAt": 1760315600889.0,
+  "usageCount": 18.0,
+  "userId": "user_30mlLem6xz7dBn7sqJNMUozNjBR"
+}

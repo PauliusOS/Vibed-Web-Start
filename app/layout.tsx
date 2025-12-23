@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
         <ClientBody className={`${geistMono.variable} antialiased font-mona-regular`}>
           <ClerkProvider

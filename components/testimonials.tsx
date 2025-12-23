@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { MotionPreset } from '@/components/ui/motion-preset';
 
 export function Testimonials() {
   const creators = [
@@ -105,12 +106,24 @@ export function Testimonials() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-[#16101e] text-4xl sm:text-5xl font-bold mb-4">
-            Don't Listen to Us. Hear it from them.
-          </h2>
-          <p className="text-[#16101e]/60 text-base sm:text-lg">
-            Creators who worked with us and loved the results.
-          </p>
+          <MotionPreset
+            fade
+            slide={{ direction: 'up', offset: 30 }}
+            delay={0}
+          >
+            <h2 className="text-[#16101e] text-4xl sm:text-5xl font-bold mb-4">
+              Don't Listen to Us. Hear it from them.
+            </h2>
+          </MotionPreset>
+          <MotionPreset
+            fade
+            slide={{ direction: 'up', offset: 20 }}
+            delay={0.1}
+          >
+            <p className="text-[#16101e]/60 text-base sm:text-lg">
+              Creators who worked with us and loved the results.
+            </p>
+          </MotionPreset>
         </div>
       </div>
 
@@ -179,14 +192,10 @@ export function Testimonials() {
         .animate-scroll-creators {
           display: flex;
           width: max-content;
-          animation: scroll-creators 40s linear infinite;
+          animation: scroll-creators 70s linear infinite;
           will-change: transform;
           backface-visibility: hidden;
           perspective: 1000px;
-        }
-
-        .animate-scroll-creators:hover {
-          animation-play-state: paused;
         }
       `}</style>
     </section>

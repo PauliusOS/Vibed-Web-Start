@@ -15,8 +15,8 @@ export default function TermsOfServicePage() {
             {/* Logo */}
             <Link href="/" className="flex items-center">
               <Image
-                src="/logos/silkroad-logo.png"
-                alt="SilkRoad"
+                src="/logos/sylcroad-logo.png"
+                alt="SylcRoad"
                 width={120}
                 height={32}
                 className="h-8 w-auto"
